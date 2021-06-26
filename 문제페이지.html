@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>준비됐멍?</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar navbar-static-top bg-white">
+    <div class="container">
+      <div class="navbar-brand brand_flex">
+        <div style="font-weight:bold;color: #3C64B1;font-size: 80%;">ARE YOU READY?</div>
+        <div style="font-weight:bold;font-size: 120%; margin-top: 5%;">준비됐멍?</div>
+      </div>
+      <ul class="nav navbar-nav navbar-right" style="margin-top:1%">
+        <li class="active"><a href="#">반려견 입양 준비도 테스트</a></li>
+        <li><a href="#">유기견 입양</a></li>
+        <li><a href="#">About US</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <div class="controller">
+      <button id="prev"onclick="prev()" style="position: absolute;top: 50%; left:0%;"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> 이전문제</button>
+      <button id="next" onclick="next()" style="position: absolute;top: 50%; right: 0%;">다음문제 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>  
+    </div>
+    <div class="container">
+      <div class="container container-main">
+        <div class="imgGroup">
+          <img id="dangdang" style="width:10%;position:absolute;left: 0%;" src="dangdang.png"/>
+          <img style="width:10%; float: right;" src="house.png"/>
+        </div>
+        <div class="progress">
+          <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
+        </div>
+        <div class="question" id="question"></div>
+        <div class="answer" id="answer"></div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="container">
+      <img style="width:100%;" src="ad.jpg"/>
+  </div>
+  </footer>
+  <script>
+    var count=0;
+    var strAnswer=new Array;
+    var chkAnswer=new Array(100);
+    var arr=new Array();
+    getData();
+    function getData(){
+      $.get('data.csv', function(data) {
+        var head = data.split("\n");
+        for(var i=0;i<head.length;i++){
+          if(i==0){
+            continue;
+          }
+          var text = head[i].split(",");
+          var temp=new Array();
+          for(var j=0;j<text.length;j++){
+            temp.push(text[j]);
+          }
+          arr.push(temp);
+        }
+        getQuestion();
+      });
+    }
+    function getQuestion(){
+      $('#question').empty();
+      $('#answer').empty();
+      var top_html="";
+      var mid_html="";
+      var answer_html="";
+      if(count==arr.length){
+        var imgDangDang=document.getElementById("dangdang");
+        var progress=document.getElementById("progress");
+        var percent_dog=String(parseInt((count/arr.length)*100))+"%";
+        var percent_bar=String(parseInt((count/arr.length)*100)+5)+"%";
+        //alert("문제끝");
+      }
+      else{
+        var imgDangDang=document.getElementById("dangdang");
+        var progress=document.getElementById("progress");
+        var percent_dog=String(parseInt((count/arr.length)*100))+"%";
+        var percent_bar=String(parseInt((count/arr.length)*100)+5)+"%";
+        progress.style.width=percent_bar;
+        imgDangDang.style.left=percent_dog;
+        top_html+='<div class="title"><h1>'+arr[count][0]+'</h1></div>';
+        top_html+='<div class="subtitle"><h3>'+arr[count][1]+'</h3></div>';
+        temp=arr[count][3].split(";");
+        for(var j=0;j<temp.length;j++){
+          mid_html+='<button id="'+j+'" onclick="item(this.id)">'+temp[j]+'</button>';
+        }
+        strAnswer=arr[count][5].split(';');
+        $('#question').append(top_html);
+        $('#answer').append(mid_html);
+      }
+      count++;
+    }
+    function item(id) {
+    var btn=document.getElementById(id);
+      if(btn.style.color != "rgb(255, 255, 255)"){
+        btn.style.background="#3C64B1";
+        btn.style.color="#ffffff";
+        chkAnswer[id]="*";
+      }
+      else{
+        btn.style.background="#ffffff";
+        btn.style.color="#3C64B1";
+        chkAnswer[id]="-";
+      }
+    }
+    function prev() {
+    var btn=document.getElementById("prev");
+      if(btn.style.color != "rgb(255, 255, 255)"){
+        btn.style.background="#D3335A";
+        btn.style.color="#ffffff";
+      }
+      else{
+        btn.style.background="#ffffff";
+        btn.style.color="#D3335A";
+      }
+    }
+    function next() {
+      for(var i=0;i<strAnswer.length;i++){
+        chkAnswer[strAnswer[i]]=="*"
+      }
+      getQuestion();
+      var btn=document.getElementById("next");
+      if(btn.style.color != "rgb(255, 255, 255)"){
+        btn.style.background="#D3335A";
+        btn.style.color="#ffffff";
+      }
+      else{
+        btn.style.background="#ffffff";
+        btn.style.color="#D3335A";
+      }
+    }
+  </script>
+</body>
+<style>
+  #dangdang{
+    transition: all 500ms ease-out 1ms;
+  }
+  .question .title h1{
+    font-size:40px;
+  }
+  .subtitle{
+    color:gray;
+  }
+  .controller button{
+    font-weight: bold;
+    background-color: white;
+    color: #D3335A;
+    border: 2px solid #D3335A;
+    padding: 0.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .controller button:hover{
+    background-color: #D3335A;
+    color: white;
+  }
+  footer{ position:fixed; 
+  left:0px; 
+  bottom:0px; 
+  height:130px; 
+  width:100%; 
+  }
+  .navbar{
+    margin-bottom: 7%;
+  }
+  .answer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 130px;
+  }
+  .answer button{
+    margin:1%;
+    border:2px solid #3C64B1;
+    box-sizing: border-box;
+    background:#FFFFFF;
+    color: #3C64B1;
+    font-weight: bold;
+    font-size: large;
+    padding: 1.5%;
+  }
+  .answer button:hover{
+    background-color:#3C64B1;
+    color: #FFFFFF;
+  }
+  .question{
+    text-align: center;
+  }
+  .imgGroup{
+    position:relative;
+    margin-bottom: 10%;
+  }
+  .navbar-right .active a{
+    color: #3C64B1;
+  }
+  .navbar-right li a{
+    color: black;
+    font-weight: bold;
+  }
+  nav{
+    color: black;
+  }
+  .brand_flex{
+    display: flex;
+    flex-direction: column;
+  }
+  .progress{
+    height: 10px;
+    width: 100%;
+    background-color: #B2ADAD;
+    background-image: linear-gradient(#B2ADAD);
+    background-image: linear-gradient(to bottom,#B2ADAD 0,#B2ADAD 100%);
+  }
+  .progress-bar{
+    background: #0C0C0C;
+  }
+  .container-main{
+    width: 80%;
+  }
+</style>
+</html>
