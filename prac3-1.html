@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>준비됐멍?</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-static-top bg-white">
+        <div class="container">
+          <div class="navbar-brand brand_flex">
+            <div style="font-weight:bold;color: #3C64B1;font-size: 80%;">ARE YOU READY?</div>
+            <div style="font-weight:bold;font-size: 120%; margin-top: 5%;">준비됐멍?</div>
+          </div>
+          <ul class="nav navbar-nav navbar-right" style="margin-top:1%">
+            <li class="active"><a href="#">반려견 입양 준비도 테스트</a></li>
+            <li><a href="#">유기견 입양</a></li>
+            <li><a href="#">About US</a></li>
+          </ul>
+        </div>
+      </nav>
+    <main>
+        <div class="Img">
+            <img style="width: 38%; position:absolute; right: 52%;" src="potato.jpeg">
+        </div>
+        <div id="title">
+            <h1>다시 도전해보시겠어요? ㅠ^ㅠ</h1>
+            <div>
+                <h3 id="subtitle">준비됐멍?(주)에서 시행한 멍멍고사의 반려동물 입양 준비도 테스트에서 안타깝게 틀린 문제가 있었어요.<br>문제와 답을 다시 점검하여 부족한 부분을 확인해보세요.</h3>
+            </div>
+            <div class="button">
+                <button onclick="location.href='#'" id="back"onclick="item1()">메인화면으로 돌아가기</button>
+                <button onclick="location.href='#'" id="sns" onclick="item2()">SNS 공유하기</button>
+            </div>
+            <div class="ban">
+                <button onclick="location.href='#'" id="banner" onclick="item3()">혹시 유기견 입양에 관심이 있으신가요?</button> 
+            </div>
+        </div>
+
+    </main>
+</body>
+<style>
+    .ban {
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+        font-size: 14px;
+    }
+    .button {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 60px;
+
+    }
+    #back {
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #3C64B1;
+        color: #FFFFFF;
+        border: 2px solid #3C64B1;
+        padding:  0.5%;
+        padding-left: 1%;
+        padding-right: 1%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    #sns {
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #3C64B1;
+        color: #FFFFFF;
+        border: 2px solid #3C64B1;
+        padding:  0.5%;
+        padding-left: 1%;
+        padding-right: 1%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    #banner {
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #F4F5F4;
+        color: black;
+        border: 2px solid #F4F5F4;
+        padding:  0.5%;
+        padding-left: 1%;
+        padding-right: 1%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    #title { 
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        width: 45%;
+        position: absolute;
+        left: 50%;
+        text-align: center;
+        margin-top: 80px;
+    }
+    #subtitle {
+        
+        font-family: Mulish;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 22px;
+        color: #737B7D;
+        margin-top: 60px;
+        
+    }
+    .navbar-right .active a{
+      color: #3C64B1;
+    }
+    .navbar-right li a{
+      color: black;
+      font-weight: bold;
+    }
+    nav{
+      color: black;
+    }
+    .Img {
+    position:relative;
+    margin-bottom: 10%;
+    }
+  </style>
+</html>
