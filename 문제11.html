@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>멍멍고사</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar navbar-static-top bg-white">
+    <div class="container">
+      <div class="navbar-brand brand_flex">
+        <div style="font-weight:bold;color: #3C64B1;font-size: 80%;">ARE YOU READY?</div>
+        <div style="font-weight:bold;font-size: 120%; margin-top: 5%;">준비됐멍?</div>
+      </div>
+      <ul class="nav navbar-nav navbar-right" style="margin-top:1%">
+        <li class="active"><a href="#">반려견 입양 준비도 테스트</a></li>
+        <li><a href="#">유기견 입양</a></li>
+        <li><a href="#">About US</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <div class="controller">
+      <button id="prev"onclick="prev()" style="position: absolute;top: 50%; left:0%;"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <a href="#"></a>이전문제</button>
+      <button id="next" onclick="next()" style="position: absolute;top: 50%; right: 0%;"><a href="문제12.html">다음문제 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></a>  
+    </div>
+    <div class="container">
+      <div class="container container-main">
+        <div class="imgGroup">
+          <img style="width:10%;position:absolute;left: 45%;" src="dangdang.png"/>
+          <img style="width:10%; float: right;" src="house.png"/>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+        </div>
+        <div class="question">
+          <div class="title">
+            <h1>2. 멍 트레이닝</h1>
+          </div>
+          <div class="subtitle">
+            <h3>어린 강아지의 사교성을 장려하기 위해 적합한 것은 무엇인가?</h3>
+          </div>
+        </div>
+        <div class="answer">
+          <button id="yes"onclick="item1()">강아지 시기에 많은 사회적 자극을 제공해야 한다</button>
+          <button id="no" onclick="item2()">다른 낯선 강아지와의 접촉은 피해야 한다</button>
+          <button id="no" onclick="item2()">모견, 형제 견과의 분리는 가능한 한 빨리 이루어져야 한다</button>
+          <button id="no" onclick="item2()">성견으로부터 억압받지 않도록 거리를 두어야 한다</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <!-- <input type="file" name="filename" id="filename">
+    <button id="no" onclick="getData()">아니다</button> -->
+    <div id="div"></div>
+    <div class="container">
+      <img style="width:100%;" src="ad.jpg"/>
+  </div>
+  </footer>
+  <script>
+    function getData(){
+      var csv = $('#filename');
+      alert(csv);
+      var csvFile = csv[0].files[0];
+      alert(csvFile);
+
+      var csv="data.csv"
+      var ext = csv.split(".").pop().toLowerCase();
+
+      if($.inArray(ext, ["csv"]) === -1){
+          alert('upload csv');
+          return false;
+      }
+      if(csvFile != undefined){
+          reader = new FileReader();
+          reader.onload = function(e){
+
+              csvResult = e.target.result.split(/\r|\n|\r\n/);
+              $('#div').append(csvResult);
+          }
+          reader.readAsText(csvFile,"utf8");
+      }
+    }
+    function item1() {
+    var btn=document.getElementById("yes");
+      if(btn.style.color != "rgb(255, 255, 255)"){
+        btn.style.background="#3C64B1";
+        btn.style.color="#ffffff";
+      }
+      else{
+        btn.style.background="#ffffff";
+        btn.style.color="#3C64B1";
+      }
+    }
+    function item2() {
+    var btn=document.getElementById("no");
+      if(btn.style.color != "rgb(255, 255, 255)"){
+        btn.style.background="#3C64B1";
+        btn.style.color="#ffffff";
+      }
+      else{
+        btn.style.background="#ffffff";
+        btn.style.color="#3C64B1";
+      }
+    }
+    function prev() {
+    var btn=document.getElementById("prev");
+      if(btn.style.color != "rgb(255, 255, 255)"){
+        btn.style.background="#D3335A";
+        btn.style.color="#ffffff";
+      }
+      else{
+        btn.style.background="#ffffff";
+        btn.style.color="#D3335A";
+      }
+    }
+    function next() {
+    var btn=document.getElementById("next");
+      if(btn.style.color != "rgb(255, 255, 255)"){
+        btn.style.background="#D3335A";
+        btn.style.color="#ffffff";
+      }
+      else{
+        btn.style.background="#ffffff";
+        btn.style.color="#D3335A";
+      }
+    }
+  </script>
+</body>
+<style>
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    a:hover { color:white; text-decoration: none;}
+    a:active { color:#D3335A; text-decoration: none;}
+    a:link { color:#D3335A; text-decoration: none;}  
+
+  .question .title h1{
+    font-size:40px;
+  }
+  .subtitle{
+    color:gray;
+  }
+  .controller button{
+    font-weight: bold;
+    background-color: white;
+    color: #D3335A;
+    border: 2px solid #D3335A;
+    padding: 0.5%;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .controller button:focus{
+    color: white;
+  }
+  .controller button:hover{
+    background: rgba(216, 35, 111, 0.9);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(216, 35, 111, 0.9);
+    color: #fff;
+  } 
+  footer{ position:fixed; 
+  left:0px; 
+  bottom:0px; 
+  height:130px; 
+  width:100%; 
+  }
+  .navbar{
+    margin-bottom: 7%;
+  }
+  .answer{
+    display: flex;
+    flex-direction: column;
+  }
+  .answer button{
+    margin:3%;
+    border:2px solid #3C64B1;
+    box-sizing: border-box;
+    background:#FFFFFF;
+    color: #3C64B1;
+    font-weight: bold;
+    font-size: large;
+    padding: 1.5%;
+  }
+  .question{
+    text-align: center;
+  }
+  .imgGroup{
+    position:relative;
+    margin-bottom: 10%;
+  }
+  .navbar-right .active a{
+    color: #3C64B1;
+  }
+  .navbar-right li a{
+    color: black;
+    font-weight: bold;
+  }
+  nav{
+    color: black;
+  }
+  .brand_flex{
+    display: flex;
+    flex-direction: column;
+  }
+  .progress{
+    height: 10px;
+    width: 100%;
+    background-color: #B2ADAD;
+    background-image: linear-gradient(#B2ADAD);
+    background-image: linear-gradient(to bottom,#B2ADAD 0,#B2ADAD 100%);
+  }
+  .progress-bar{
+    background: #0C0C0C;
+  }
+  .container-main{
+    width: 80%;
+  }ㅣ
+  #yes:hover, #no:hover{
+    background: rgba(71, 107, 187, 0.9);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(71, 107, 187, 0.9);
+    color: #fff;
+  }
+
+  /* a{
+      text-decoration: none;
+      background-color: none;
+  } */
+  /* .nav, .navbar-nav, .navbar-right{
+      text-decoration: none;
+      color: #373F41;
+      }
+  a {
+         text-decoration: none; 
+         color:#373F41;
+      }
+      a:hover{
+        color:#3C64B1;  */
+</style>
+</html>
